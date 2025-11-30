@@ -123,4 +123,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'git_user_name' => 'RunTracker',
+    'git_user_email' => 'arzamaskov@gmail.com',
 ];
