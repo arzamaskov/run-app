@@ -4,6 +4,17 @@
 
 Формат основан на [Keep a Changelog](https://keepachangelog.com/ru/1.0.0/).
 
+## [0.5.0] - 2025-12-03
+
+### Added
+
+- feat(identity): реализована регистрация пользователей с использованием CQRS (#14) ([45d1e10])
+- feat(identity): метод find в UserRepository с UserMapper и UuidCast (#13) ([296d605])
+
+### Changed
+
+- refactor(release): рефакторинг PrepareRelease в DDD-стиле ([48d8713])
+
 ## [Unreleased]
 
 ## [0.4.0] - 2025-11-20

@@ -14,6 +14,7 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+    'version' => env('APP_VERSION', '0.5.0'),
 
     /*
     |--------------------------------------------------------------------------
@@ -123,4 +124,6 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'git_user_name' => 'RunTracker',
+    'git_user_email' => 'arzamaskov@gmail.com',
 ];
