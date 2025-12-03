@@ -1,6 +1,6 @@
 .PHONY: help build up down restart logs shell composer pnpm artisan migrate fresh seed test \
         lint stan psql backup-db restore-db test-db-create test-db-drop ci permissions \
-        clean install fresh-install volumes ps info tinker
+        clean install fresh-install volumes ps info tinker release release-minor release-patch release-major
 .DEFAULT_GOAL := help
 
 # =============================================================================
@@ -374,3 +374,29 @@ info: ## Показать информацию о проекте
 	@echo ""
 	@echo "$(GREEN)Laravel:$(NC)"
 	@printf "  " && $(DC_EXEC) php-fpm php artisan --version
+
+# =============================================================================
+# Релизы
+# =============================================================================
+
+release: ## Подготовить релиз (make release TYPE=minor VERSION=1.2.3)
+	@if [ -z "$(TYPE)" ]; then \
+		$(DC_EXEC) php-fpm php artisan release:prepare $(if $(VERSION),$(VERSION),) --type=$(or $(TYPE),minor); \
+	else \
+		$(DC_EXEC) php-fpm php artisan release:prepare $(if $(VERSION),$(VERSION),) --type=$(TYPE); \
+	fi
+
+release-minor: ## Подготовить minor релиз (make release-minor VERSION=1.2.3)
+	$(DC_EXEC) php-fpm php artisan release:prepare $(if $(VERSION),$(VERSION),) --type=minor
+
+release-patch: ## Подготовить patch релиз (make release-patch VERSION=1.2.3)
+	$(DC_EXEC) php-fpm php artisan release:prepare $(if $(VERSION),$(VERSION),) --type=patch
+
+release-major: ## Подготовить major релиз (make release-major VERSION=1.2.3)
+	$(DC_EXEC) php-fpm php artisan release:prepare $(if $(VERSION),$(VERSION),) --type=major
+
+release-no-commit: ## Подготовить релиз без коммита (make release-no-commit TYPE=minor)
+	$(DC_EXEC) php-fpm php artisan release:prepare $(if $(VERSION),$(VERSION),) --type=$(or $(TYPE),minor) --no-commit
+
+release-no-tag: ## Подготовить релиз без тега (make release-no-tag TYPE=minor)
+	$(DC_EXEC) php-fpm php artisan release:prepare $(if $(VERSION),$(VERSION),) --type=$(or $(TYPE),minor) --no-tag
